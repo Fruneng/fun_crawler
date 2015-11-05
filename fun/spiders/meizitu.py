@@ -17,6 +17,9 @@ class MeizituSpider(scrapy.Spider):
         for link in sel.xpath('//h2/a/@href').extract():
             request = scrapy.Request(link, callback=self.parse_item)
             yield request
+        for link in sel.xpath('//h3/a/@href').extract():
+            request = scrapy.Request(link, callback=self.parse_item)
+            yield request
 
         pages = sel.xpath("//div[@class='navigation']/div[@id='wp_page_numbers']/ul/li/a/@href").extract()
         print('pages: %s' % pages)
